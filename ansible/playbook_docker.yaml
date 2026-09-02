@@ -1,0 +1,51 @@
+---
+- name: Install and Configure Docker on Amazon Linux
+  hosts: main_machines
+  become: true
+  remote_user: ec2-user
+
+  tasks:
+    - name: Install docker package
+      ansible.builtin.dnf:
+        name: docker
+        state: present
+        update_cache: true
+
+    - name: Ensure Docker service is started and enabled on boot
+      ansible.builtin.systemd:
+        name: docker
+        state: started
+        enabled: true
+
+    - name: Add remote user to the docker group
+      ansible.builtin.user:
+        name: "{{ ansible_user | default('ec2-user') }}"
+        groups: docker
+        append: true
+
+    - name: Reset SSH connection to apply group membership changes
+      ansible.builtin.meta:
+        reset_connection
+
+
+    - name: Pull the frontend image
+      community.docker.docker_image_pull:
+        name: noranasser750/e-commarce-frontend:v1
+
+    - name: Create and run the  app container
+      community.docker.docker_container:
+        name: e-commarce-app
+        image: noranasser750/e-commarce-frontend:v1
+        state: started
+        restart_policy: always
+        ports:
+          - "80:80"
+
+    - name: Validate frontend is running
+      ansible.builtin.uri:
+        url: http://localhost:80
+        status_code: 200
+      register: frontend_check
+      retries: 5
+      delay: 2
+      until: frontend_check.status == 200

@@ -18,6 +18,10 @@ This project is a learning-focused AWS infrastructure setup built with Terraform
 
 This repository was created as a hands-on project to practice Terraform, AWS networking, and Ansible automation.
 
+## Useful references
+
+- How to add a bastion host to connect to private machines using Ansible: https://drive.google.com/file/d/1DnYjNwbRi6J7KEFECWlrqSvtCcEzjBFt/view?usp=sharing
+
 ---
 
 ## Architecture Overview
