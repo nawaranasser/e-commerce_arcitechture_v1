@@ -1,16 +1,16 @@
 Host bastion
-    HostName 100.58.251.227
+    HostName <machine1-ip>
     User ec2-user
     IdentityFile ../deployer-key.pem
 
 Host machine1
-    HostName 10.0.3.181
+    HostName <machine2-ip>
     User ec2-user
     IdentityFile ../deployer-key.pem
     ProxyCommand ssh -F ./ssh_config bastion -W %h:%p    
 
 Host machine2
-    HostName 10.0.4.197  
+    HostName <machine3-ip>  
     User ec2-user
     IdentityFile ../deployer-key.pem
     ProxyCommand ssh -F ./ssh_config bastion -W %h:%p 
