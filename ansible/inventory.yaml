@@ -1,0 +1,8 @@
+bastion_machines:
+  hosts:
+    bastion: {}
+main_machines:
+  hosts:
+    machine1:  {}
+    machine2:  {}
+
