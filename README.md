@@ -21,6 +21,7 @@ This repository was created as a hands-on project to practice Terraform, AWS net
 ## Useful references
 
 - How to add a bastion host to connect to private machines using Ansible: https://drive.google.com/file/d/1DnYjNwbRi6J7KEFECWlrqSvtCcEzjBFt/view?usp=sharing
+- How to create custom Docker image and deploy it using an Ansible playbook (video): https://drive.google.com/file/d/1VvqLtnnusEBAGp2TewcE91UmoaO6-OG9/view?usp=sharing
 
 ---
 
@@ -173,6 +174,9 @@ ansible all -m ping
 - `ansible/inventory.yaml` — inventory for managed hosts
 - `ansible/ansible.cfg` — Ansible default configuration
 - `ansible/ssh_config` — SSH connection settings for hosts
+- `ansible/playbook_docker.yaml` — prepared Ansible playbook to install Docker, configure the environment, and deploy the custom application image
+
+This project also includes a prepared Ansible playbook to install Docker on the target hosts and deploy the custom application image built for the app. The playbook automates the setup needed to run the containerized application in the EC2 environment.
 
 ---
 
